@@ -1,97 +1,116 @@
 #ifndef _VEC3_
 #define _VEC3_
+#include <math.h>
 
-template <class type>
-
+template <class TYPE>
+//class string
+//string a;
+//string b("Hello!");
+//string c(b);
+//a = "bye";
 class Vec3
 {
 public:
 	Vec3();
-	Vec3(type x, type y, type z);
-	Vec3(type a);
+	Vec3(TYPE x, TYPE y, TYPE z);
+	Vec3(TYPE a);
 	~Vec3();
 
 	Vec3 operator+ (const Vec3 &vec)const;
 	Vec3 operator- (const Vec3 &vec)const;
-	Vec3 operator+= (const Vec3 &vec)const;
-	Vec3 operator-= (const Vec3 &vec)const;
-	bool operator= (const Vec3 &vec)const;
+	Vec3 operator+= (const Vec3 &vec);
+	Vec3 operator-= (const Vec3 &vec);
+	Vec3 operator= (const Vec3 &vec);
 	bool operator== (const Vec3 &vec)const;
 
 	void normalize()const;
 	void zero()const;
 	bool is_zero()const;
-	void distance_to()const;
+	TYPE distance_to(const Vec3 &vec)const;
+	Vec3 distance_squared(const Vec3 &vec)const;
 
-private:
-	type x, y, z;
+	TYPE x, y, z;
 };
 
-template <class type>
-Vec3<type>::Vec3() {}
+template <class TYPE>
+Vec3<TYPE>::Vec3() {}
 
-template <class type>
-Vec3<type>::Vec3(type x, type y, type z) : x(x), y(y), z(z) {}
+template <class TYPE>
+Vec3<TYPE>::Vec3(TYPE x, TYPE y, TYPE z) : x(x), y(y), z(z) {}
 
-template <class type>
-Vec3<type>::Vec3(type a) : z(a), y(a), z(a) {}
+template <class TYPE>
+Vec3<TYPE>::Vec3(TYPE a) : z(a), y(a), z(a) {}
 
-template <class type>
-Vec3<type>::~Vec3() {}
+template <class TYPE>
+Vec3<TYPE>::~Vec3() {}
 
-template <class type>
-Vec3<type> Vec3<type>::operator+(const Vec3 &vec)const
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::operator+(const Vec3 &vec)const
 {
-	return Vec3<type>(this->x + vec.x, this->y + vec.y, this->z + vec.z);
+	return Vec3<TYPE>(this->x + vec.x, this->y + vec.y, this->z + vec.z);
 }
 
-template <class type>
-Vec3<type> Vec3<type>::operator-(const Vec3 &vec)const
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::operator-(const Vec3 &vec)const
 {
-	return Vec3<type>(this->x - vec.x, this->y - vec.y, this->z - vec.z);
+	return Vec3<TYPE>(this->x - vec.x, this->y - vec.y, this->z - vec.z);
 }
 
-template <class type>
-Vec3<type> Vec3<type>::operator+= (const Vec3 &vec)const
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::operator+= (const Vec3 &vec)
 {
 	return (this->x + vec.x, this->y + vec.y, this->z + vec.z);
 }
 
-template <class type>
-Vec3<type> Vec3<type>::operator-= (const Vec3 &vec)const
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::operator-= (const Vec3 &vec)
 {
 	return (this->x - vec.x, this->y - vec.y, this->z - vec.z);
 }
 
-template <class type>
-bool Vec3<type>::operator= (const Vec3 &vec)const
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::operator= (const Vec3 &vec)
 {
 	return (this->x = vec.x, this->y = vec.y, this->z = vec.z);
 }
 
-template <class type>
-bool Vec3<type>::operator== (const Vec3 &vec)const
+template <class TYPE>
+bool Vec3<TYPE>::operator== (const Vec3 &vec)const
 {
 	return (this->x == vec.x, this->y == vec.y, this->z == vec.z);
 }
 
-template <class type>
-void Vec3<type>::normalize()const
+template <class TYPE>
+void Vec3<TYPE>::normalize()const
 {
-	type module = (sqrt(x*x + y * y + z * z));
-	return Vec3<type>(x / module, y / module, z / module);
+	TYPE module = (sqrt(x * x + y * y + z * z));
+	Vec3<TYPE>(x / module, y / module, z / module);
 }
 
-template <class type>
-void Vec3<type>::zero()const
+template <class TYPE>
+void Vec3<TYPE>::zero()const
 {
-	return Vec3<type>(this->x = 0, this->y = 0, this->z = 0)
+	Vec3<TYPE>(this->x = 0, this->y = 0, this->z = 0);
 }
 
-template <class type>
-bool Vec3<type>::is_zero()const
+template <class TYPE>
+bool Vec3<TYPE>::is_zero()const
 {
-	return Vec3<type>(this->x = 0, this->y = 0, this->z = 0)
+	return Vec3<TYPE>(this->x == 0, this->y == 0, this->z == 0);
+}
+
+template <class TYPE>
+TYPE Vec3<TYPE>::distance_to(const Vec3 &vec)const
+{
+	TYPE distance = sqrt(((x - vec.x) * (x - vec.x)) + ((y - vec.y) * (y - vec.y)) + ((z - vec.z) * (z - vec.z)));
+	return distance;
+}
+
+template <class TYPE>
+Vec3<TYPE> Vec3<TYPE>::distance_squared(const Vec3 &vec)const
+{
+	TYPE distance_squared = ((x - vec.x) * (x - vec.x)) + ((y - vec.y) * (y - vec.y)) + ((z - vec.z) * (z - vec.z));
+	return distance_squared;
 }
 
 #endif

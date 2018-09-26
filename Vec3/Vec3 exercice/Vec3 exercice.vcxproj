@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Class.h" />
+    <ClInclude Include="String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />

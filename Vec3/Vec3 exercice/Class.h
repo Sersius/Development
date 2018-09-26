@@ -26,8 +26,8 @@ public:
 	void normalize()const;
 	void zero()const;
 	bool is_zero()const;
-	TYPE distance_to(const Vec3 &vec)const;
-	Vec3 distance_squared(const Vec3 &vec)const;
+	float distance_to(const Vec3 &vec)const;
+	TYPE distance_squared(const Vec3 &vec)const;
 
 	TYPE x, y, z;
 };
@@ -90,24 +90,24 @@ void Vec3<TYPE>::normalize()const
 template <class TYPE>
 void Vec3<TYPE>::zero()const
 {
-	Vec3<TYPE>(this->x = 0, this->y = 0, this->z = 0);
+	Vec3<TYPE>(this->x = 0.0f, this->y = 0.0f, this->z = 0.0f);
 }
 
 template <class TYPE>
 bool Vec3<TYPE>::is_zero()const
 {
-	return Vec3<TYPE>(this->x == 0, this->y == 0, this->z == 0);
+	return Vec3<TYPE>(this->x == 0.0f, this->y == 0.0f, this->z == 0.0f);
 }
 
 template <class TYPE>
-TYPE Vec3<TYPE>::distance_to(const Vec3 &vec)const
+float Vec3<TYPE>::distance_to(const Vec3 &vec)const
 {
 	TYPE distance = sqrt(((x - vec.x) * (x - vec.x)) + ((y - vec.y) * (y - vec.y)) + ((z - vec.z) * (z - vec.z)));
 	return distance;
 }
 
 template <class TYPE>
-Vec3<TYPE> Vec3<TYPE>::distance_squared(const Vec3 &vec)const
+TYPE Vec3<TYPE>::distance_squared(const Vec3 &vec)const
 {
 	TYPE distance_squared = ((x - vec.x) * (x - vec.x)) + ((y - vec.y) * (y - vec.y)) + ((z - vec.z) * (z - vec.z));
 	return distance_squared;

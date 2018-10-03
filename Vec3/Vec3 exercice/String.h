@@ -1,11 +1,12 @@
 #ifndef _STRING_
 #define _STRING_
+#include <assert.h>
 
 class string
 {
 private:
-	char* text;
-	unsigned int length = 0u;
+	char* text = nullptr;
+	unsigned int alloc_mem = 0u;
 
 public:
 
@@ -13,10 +14,11 @@ public:
 
 	string(char c) {
 		text = &c;
-		length = 1;
+		alloc_mem = 1;
 	}
 
 	string(const char* c) {
+		assert(c != nullptr);
 		if (c)
 		{
 			unsigned int i = 0;
@@ -30,18 +32,18 @@ public:
 			for (unsigned int j = 0; j <= i; j++)
 				text[j] = c[j];
 
-			length = i;
+			alloc_mem = i;
 		}
 		else
 		{
-			length = 0;
+			alloc_mem = 0;
 			text = new char[0];
 		}
 	}
 
-	string(const string &str) :text(str.text), length(str.length) {}
+	string(const string &str) :text(str.text), alloc_mem(str.alloc_mem) {}
 
-	void operator = (const char* c) {
+	string operator = (const char* c) {
 		unsigned int i = 0;
 		while (c[i] != '\0')
 			i++;
@@ -50,7 +52,17 @@ public:
 		for (unsigned int j = 0; j <= i; j++)
 			text[j] = c[j];
 
-		length = i;
+		alloc_mem = i;
+
+		return *this;
+	}
+
+	~string()
+	{
+		if(text != nullptr)			
+			text = nullptr;
+			alloc_mem = 0u;
+			delete[] text;
 	}
 };
 

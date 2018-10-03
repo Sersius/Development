@@ -1,2 +1,4 @@
 ﻿  Main.cpp
-  Vec3 exercice.vcxproj -> C:\Users\sergiogr5\Desktop\Development-master\Vec3\Debug\Vec3 exercice.exe
+c:\users\sergiogr5\documents\github\development\vec3\vec3 exercice\main.cpp(12): warning C4477: 'printf_s' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+c:\users\sergiogr5\documents\github\development\vec3\vec3 exercice\main.cpp(14): warning C4477: 'printf_s' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'std::string'
+  Vec3 exercice.vcxproj -> C:\Users\sergiogr5\Documents\GitHub\Development\Vec3\Debug\Vec3 exercice.exe

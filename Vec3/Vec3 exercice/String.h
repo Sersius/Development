@@ -12,12 +12,14 @@ public:
 
 	string() {}
 
-	string(char c) {
+	string(char c)
+	{
 		text = &c;
 		alloc_mem = 1;
 	}
 
-	string(const char* c) {
+	string(const char* c)
+	{
 		assert(c != nullptr);
 		if (c)
 		{
@@ -43,7 +45,8 @@ public:
 
 	string(const string &str) :text(str.text), alloc_mem(str.alloc_mem) {}
 
-	string operator = (const char* c) {
+	string operator = (const char* c)
+	{
 		unsigned int i = 0;
 		while (c[i] != '\0')
 			i++;
@@ -54,6 +57,20 @@ public:
 
 		alloc_mem = i;
 
+		return *this;
+	}
+
+	string operator= (const string &string)
+	{
+		text = string.text;
+		alloc_mem = string.alloc_mem;
+		return *this;
+	}
+
+	string operator += (const string &str)
+	{
+		text += *str.text;
+		alloc_mem += str.alloc_mem;
 		return *this;
 	}
 
